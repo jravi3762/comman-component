@@ -11,6 +11,11 @@ export const privateRouteList = [
 ];
 export const publicRouteList = [
   {
+    title: "Registration",
+    path: "/",
+    element: Registration,
+  },
+  {
     title: "Login",
     path: "/login",
     element: Login,

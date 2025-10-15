@@ -3,8 +3,10 @@ import { lazy, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import Loader from "../components/lodear/Loader";
 
 const Login = lazy(() => import("../features/login/Login"));
+const Register = lazy(() => import("../features/registration/Register"));
 const Dashboard = lazy(() => import("../features/dasbord/Dashboard"));
 const NoDataFound = lazy(() =>
   import("../components/no-data-found/NoDataFound")
@@ -17,6 +19,14 @@ const RouteComponent = () => {
       element: (
         <PublicRoute>
           <Login />
+        </PublicRoute>
+      ),
+    },
+    {
+      path: "/",
+      element: (
+        <PublicRoute>
+          <Register />
         </PublicRoute>
       ),
     },
@@ -42,8 +52,7 @@ const RouteComponent = () => {
     <Suspense
       fallback={
         <div className="d_flex_center h-[100vh]">
-          {/* <Loader /> */}
-          <p>loader</p>
+          <Loader />
         </div>
       }
     >
