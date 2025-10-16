@@ -1,69 +1,67 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PasswordToggleIcon from "../../components/passwordIcon/PasswordToggleIcon";
+import { registerUser } from "../../redux/authSlice";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = (e) => {
     e.preventDefault();
-
     const userData = {
       name: e.target.name.value,
       email: e.target.email.value,
       password: e.target.password.value,
     };
-
-    // Save user in localStorage
-    localStorage.setItem("userData", JSON.stringify(userData));
+    dispatch(registerUser(userData));
     alert("Registration successful!");
     navigate("/login");
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h2>Register Page</h2>
+    <div className="container">
+      <div className="redister_page">
+        <form onSubmit={handleRegister}>
+          <h2>Register Page</h2>
+          <div className="form_group">
+            <input
+              type="text"
+              name="name"
+              placeholder="Name"
+              required
+              className="form_control"
+            />
+          </div>
 
-      <form
-        onSubmit={handleRegister}
-        style={{ display: "inline-block", textAlign: "left" }}
-      >
-        <div style={{ marginBottom: "10px" }}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            required
-            className="form_control"
-          />
-        </div>
+          <div className="form_group">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              className="form_control"
+            />
+          </div>
 
-        <div style={{ marginBottom: "10px" }}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            className="form_control"
-          />
-        </div>
+          <div className="form_group">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              required
+              className="form_control "
+            />
+            <span className="icon_view">
+              <PasswordToggleIcon onToggle={(show) => setShowPassword(show)} />
+            </span>
+          </div>
 
-        <div className="">
-          <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder="Password"
-            required
-            className="form_control "
-          />
-          <span>
-            <PasswordToggleIcon onToggle={(show) => setShowPassword(show)} />
-          </span>
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
+          <button type="submit">Register</button>
+        </form>
+      </div>
     </div>
   );
 };

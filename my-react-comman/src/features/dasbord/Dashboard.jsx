@@ -9,9 +9,21 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h2>Dashboard </h2>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="dashboard_page">
+      <div className="container">
+        <div className="header_view">
+          <h2>Dashboard </h2>
+
+          <div className="flex">
+            <button className="" onClick={() => navigate("/add-user")}>
+              Add User
+            </button>
+            <button className="ml-10" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
